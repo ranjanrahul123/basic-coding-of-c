@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<math.h>
+struct node
+{
+    int coefficient;
+    struct node*nptr;
+};
+struct node*hptr=NULL;
+void insert(int x,int i);
+void print(int degree,int m);
+int main()
+{
+     int x,m,degree,pos;
+
+printf("enter the degree of polynomial");
+scanf("%d",&degree);
+  for(pos=0;pos<=degree;pos++)
+     {
+       printf("enter the term %d",pos+1);
+       scanf("%d%d",&x,&pos);
+       insert(x,pos);
+     }
+  printf("enter the number you want to insert");     
+     scanf("%d",&m);
+     print(degree,m);
+}
+
+void insert(int x,int pos)
+{
+    struct node*temp=(struct node*)malloc(sizeof(struct node));
+    int i=0;
+    struct node*thptr=hptr;
+    temp->coefficient=x;
+    if(pos==0)
+    {
+        temp->nptr=hptr;
+        hptr=temp;
+    }
+    else
+    {
+        while(i<pos-1)
+        {
+            thptr=thptr->nptr;
+            i++;
+        }
+        temp->nptr=thptr->nptr;
+        thptr->nptr=temp;
+    }
+}    
+
+void print(int degree,int m)
+{
+    int p,r=0,d,w;
+    
+    for(p=0;p<=degree;degree--)
+       {
+           w=pow(m,degree);
+           d=(hptr->coefficient)*w;
+           r=r+d;
+           hptr=hptr->nptr;
+       }
+     printf("your result is %d",r);
+}  
+
