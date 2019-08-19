@@ -1,0 +1,65 @@
+#include<stdio.h>
+struct node
+{
+    int data;
+    struct node*nptr;
+};
+struct node*hptr=NULL;
+  struct node*t1=NULL;
+      struct node*t2=NULL;
+void insert(int x,int pos);
+void reverse();
+
+int main()
+{
+    int k=0,pos,x;
+    for(k=0;k<5;k++)
+      {
+          printf("enter the number %d",k+1);
+          scanf("%d%d",&x,&pos);
+          insert(x,pos);
+      }
+    reverse();
+    
+}
+
+void insert(int x,int pos)
+{
+    struct node* temp=(struct node*)malloc(sizeof(struct node));
+    int i=0;
+    struct node*thptr=hptr;
+    temp->data=x;
+    if(pos==0)
+    {
+        temp->nptr=hptr;
+        hptr=temp;
+    }
+    else
+    {
+        while(i<pos-1)
+        {
+            thptr=thptr->nptr;
+            i++;
+        }
+        temp->nptr=thptr->nptr;
+        thptr->nptr=temp;
+    }
+}  
+ void reverse()
+{
+    
+      while(hptr!=NULL)
+      {
+           t2=hptr->nptr;
+           hptr->nptr=t1;
+           t1=hptr;
+           hptr=t2;
+      }
+      
+      for(int s=0;s<5;s++)
+    {
+    printf("%d",t1->data);
+    t1=t1->nptr;
+    }
+      
+ }
